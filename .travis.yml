@@ -1,0 +1,10 @@
+language: csharp
+solution: NameSorter/NameSorter.sln
+install:
+  - nuget restore NameSorter/NameSorter.sln
+  - nuget install NUnit.ConsoleRunner -Version 3.9.0 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release NameSorter/NameSorter.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./NameSorter/NameSorter.Repositories.Tests/bin/Release/NameSorter.Repositories.Tests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./NameSorter/NameSorter.Engines.Tests/bin/Release/NameSorter.Engines.Tests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./NameSorter/NameSorter.Services.Tests/bin/Release/NameSorter.Services.Tests.dll
